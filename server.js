@@ -1,10 +1,13 @@
 // const rlp = require("roblox-long-polling")
 const { Client, GatewayIntentBits, ActivityType, escapeMarkdown, Partials, EmbedBuilder, Events, AttachmentBuilder } = require('discord.js');
+const express = require("express")
 const converter = require('./modules/converter')
 const fire = require('./modules/firebase')
 const buffer = require('./modules/bitbuffer')
 const path = require('path')
 const fs = require('fs')
+
+const app = express()
 
 const client = new Client({
   intents: [
@@ -167,6 +170,12 @@ client.on('messageCreate', async message => {
 });
 
 
+app.get('/', (request, response) => {
+  return response.send('OK');
+});
 
+app.listen(5000, () => {
+  console.log('App is listening on port 5000');
+});
 
 client.login('OTA2OTc0MTIxNzEwMjIzNDIy.GV6juJ.3PgaZ65DXi30ssgORAoHvrxM-G_Rr4ZJS4tDsc')
